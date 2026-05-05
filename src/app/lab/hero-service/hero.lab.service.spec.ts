@@ -1,5 +1,6 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HeroServiceForLab } from './hero.lab.service';
 import { IHero } from '../../models/ihero';
 
@@ -9,8 +10,11 @@ describe("hero service (for lab) http testing:", () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule],
-            providers: [HeroServiceForLab]
+            providers: [
+                provideHttpClient(),
+                provideHttpClientTesting(),
+                HeroServiceForLab
+            ]
         });
         service = TestBed.inject(HeroServiceForLab);
         httpMock = TestBed.inject(HttpTestingController);
